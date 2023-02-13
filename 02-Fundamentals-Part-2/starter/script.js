@@ -202,7 +202,7 @@ console.log(age1, age2, age3);
 
 const ages = [calcAge(years[0]), calcAge(years[1]), calcAge(years[years.length - 1])];
 console.log(ages);
-*/
+
 
 // BASIC ARRAYS OPERATIONS (METHODS) //
 
@@ -234,7 +234,7 @@ console.log(friends);
 console.log(friends.indexOf('Steven'));
 console.log(friends.indexOf('Bob'));
 
-// Includes mehthod - instead of returning the index of the element 
+// Includes mehthod - instead of returning the index of the element
 //will return true if the element is in the array and false is it's not
 console.log(friends.includes('Steven'))
 console.log(friends.includes('Bob'))
@@ -245,3 +245,103 @@ if (friends.includes('Steven')) {
     console.log('You have a friend called Steven')
 }
 
+
+// INTRODUCTIONS TO OBJECTS //
+// use {} In Objects the order number does not matter
+const jonasArray = [
+    'Jonas',
+    'Schmedtmann',
+    2037 - 1991,
+    'teacher',
+    ['Michael', 'Peter', 'Steven']
+
+]
+// This object has 5 properties:
+const jonas = {
+    firstName: 'Jonas',                          //key(variable name): 'value(can be of any type)'
+    lastName: 'Schmedtmann',
+    age: 2037 - 1991,
+    job: 'teacher',
+    friends: ['Michael', 'Peter', 'Steven']
+
+}
+
+// How to retrieve data from Objects and how to change data using DOT AND BRACKET NOTATION ///
+
+const jonas = {
+    firstName: 'Jonas',                          //key(variable name): 'value(can be of any type)'
+    lastName: 'Schmedtmann',
+    age: 2037 - 1991,
+    job: 'teacher',
+    friends: ['Michael', 'Peter', 'Steven']
+}
+console.log(jonas);
+
+console.log(jonas.lastName);
+console.log(jonas['lastName']);
+const nameKey = 'Name';
+console.log(jonas['first' + nameKey]);
+console.log(jonas['last' + nameKey]);
+
+const interestedIn = prompt('What do you want to know about Jonas? Choose between firstName, lastName, age, job, and friends');
+
+if (jonas[interestedIn]) {
+    console.log(jonas[interestedIn]);
+} else {
+    console.log('Wrong request! Choose between firstName, lastName, age, job, and friends')
+}
+//How to add new properties to the object
+jonas.location = 'Portugal';
+jonas['twitter'] = '@jonasschmedtman';
+console.log(jonas);
+
+//Challenge 
+// "Jonas has 3 friends, and his best friend is called Michael"
+console.log(`${jonas.firstName} has ${jonas.friends.length} friends, and his best friend is called ${jonas.friends[0]}`)
+*/
+
+
+// OBJECT METHODS //
+
+const jonas = {
+    firstName: 'Jonas',                          //key(variable name): 'value(can be of any type)'
+    lastName: 'Schmedtmann',
+    birthYear: 1991,
+    job: 'teacher',
+    friends: ['Michael', 'Peter', 'Steven'],
+    hasDriversLicense: false,
+
+    // calcAge: function (birthYear) {
+    //     return 2037 - birthYear;
+    // }
+
+    // calcAge: function () {
+    //     // console.log(this);
+    //     return 2037 - this.birthYear;               //.this - it is equal to the object calling the method
+    // }
+
+    //we can use .this to store a new property
+    calcAge: function () {
+        this.age = 2037 - this.birthYear;
+        return this.age;
+    },
+    getSummary: function () {
+        return `${this.firstName} is a ${this.calcAge()} years old ${this.job} and he 
+        has ${this.hasDriversLicense ? 'a' : 'no'} driver's license`
+    }
+}
+
+// call the function 
+console.log(jonas.calcAge());
+// or
+// console.log(jonas['calcAge'](1991));
+
+// let's say that we need to access the age multiple times 
+console.log(jonas.age);
+console.log(jonas.age);
+console.log(jonas.age);
+
+// Challenge
+//'Jonas is a 46 years old teacher' and he has a driver's license'
+
+console.log(jonas.getSummary());
