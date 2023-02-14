@@ -295,10 +295,10 @@ jonas.location = 'Portugal';
 jonas['twitter'] = '@jonasschmedtman';
 console.log(jonas);
 
-//Challenge 
+//Challenge
 // "Jonas has 3 friends, and his best friend is called Michael"
 console.log(`${jonas.firstName} has ${jonas.friends.length} friends, and his best friend is called ${jonas.friends[0]}`)
-*/
+
 
 
 // OBJECT METHODS //
@@ -326,17 +326,17 @@ const jonas = {
         return this.age;
     },
     getSummary: function () {
-        return `${this.firstName} is a ${this.calcAge()} years old ${this.job} and he 
+        return `${this.firstName} is a ${this.calcAge()} years old ${this.job} and he
         has ${this.hasDriversLicense ? 'a' : 'no'} driver's license`
     }
 }
 
-// call the function 
+// call the function
 console.log(jonas.calcAge());
 // or
 // console.log(jonas['calcAge'](1991));
 
-// let's say that we need to access the age multiple times 
+// let's say that we need to access the age multiple times
 console.log(jonas.age);
 console.log(jonas.age);
 console.log(jonas.age);
@@ -345,3 +345,141 @@ console.log(jonas.age);
 //'Jonas is a 46 years old teacher' and he has a driver's license'
 
 console.log(jonas.getSummary());
+
+
+
+/// THE FOR LOOP ///
+
+
+// console.log('Lifting weights repetition 1 🏋️');
+// console.log('Lifting weights repetition 2 🏋️');
+// console.log('Lifting weights repetition 3 🏋️');
+// console.log('Lifting weights repetition 4 🏋️');
+// console.log('Lifting weights repetition 5 🏋️');
+// console.log('Lifting weights repetition 6 🏋️');
+// console.log('Lifting weights repetition 7 🏋️');
+// console.log('Lifting weights repetition 8 🏋️');
+// console.log('Lifting weights repetition 9 🏋️');
+// console.log('Lifting weights repetition 10 🏋️');
+
+// FOR loop keeps running while condition is true
+// We have 3 conditions: 
+/ - a counter - so we can print the current value (let rep = 1)
+// - a condition - so that we can know when to stop (rep <=10)
+// - and to increase the counter  (rep ++)
+
+for (let rep = 1; rep <= 10; rep++) {
+
+    console.log(`Lifting weights repetition ${rep}🏋️`);
+}
+
+
+
+// LOOPING ARRAYS, BREAKING AND CONTINUING //
+
+const jonas = [
+    'Jonas',
+    'Schmedtmann',
+    2037 - 1991,
+    'teacher',
+    ['Michael', 'Peter', 'Steven'],
+    true
+];
+
+const types = [];
+// console.log(jonas[0]);
+// console.log(jonas[1]);
+// console.log(jonas[2]);
+// console.log(jonas[3]);
+// console.log(jonas[4]);
+// jonas[5] does not exist
+
+for (let i = 0; i < jonas.length; i++) {
+    // Reading from jonas array
+    console.log(jonas[i], typeof jonas[i]);
+    // filling  types array
+    //types[i] = typeof [i];
+    types.push(typeof jonas[i])
+}
+console.log(types);
+
+const years = [1991, 2007, 1969, 2020];
+const ages = [];
+for (let i = 0; i < years.length; i++) {
+    ages.push(2037 - years[i]);
+}
+console.log(ages);
+
+// continue and break statement
+
+console.log('---- ONLY STRINGS ----')
+for (let i = 0; i < jonas.length; i++) {
+    if (typeof jonas[i] !== 'string') continue;                                 //jonas[i] is the current element
+    console.log(jonas[i], typeof jonas[i]);
+
+}
+
+
+console.log('---- BREAK WITH NUMBER ----')
+for (let i = 0; i < jonas.length; i++) {
+    if (typeof jonas[i] === 'number') break;                                 //jonas[i] is the current element
+    console.log(jonas[i], typeof jonas[i]);
+
+}
+
+
+//// LOOPING BACKWARDS AND LOOPS IN LOOPS ///
+
+//looping backwards
+const jonas = [
+    'Jonas',
+    'Schmedtmann',
+    2037 - 1991,
+    'teacher',
+    ['Michael', 'Peter', 'Steven']
+];
+
+//4, 3, 2, 1, 0
+for (let i = jonas.length - 1; i >= 0; i--) {
+    console.log(i, jonas[i]);
+}
+// loop inside a loop
+for (let exercise = 1; exercise < 4; exercise++) {
+    console.log(`-------- Starting exercise ${exercise}`);
+    for (let rep = 1; rep < 6; rep++) {
+        console.log(`Exerxise ${exercise}: Lifting weight repetition ${rep} 🏋️`);
+    }
+}
+
+*/
+
+
+/// THE WHILE LOOP ///
+// for loop 
+// for (let rep = 1; rep <= 10; rep++) {
+//     console.log(`Lifting weights repetition ${rep} 🏋️`);
+// }
+// WHILE LOOP - we need the same components:
+// - a counter - so we can print the current value (let rep = 1)
+// - a condition - so that we can know when to stop (rep <=10)
+// - and to increase the counter  (rep ++)
+// but for the WHILE LOOP we can only specify a single condition and then manually specify the other 2 conditions
+
+let rep = 1;
+while (rep <= 10) {
+    console.log(`Lifting weights repetition ${rep} 🏋️`);
+    rep++
+}
+/// we want to roll a dice until we get a 6
+let dice = Math.trunc(Math.random() * 6) + 1;
+
+while (dice !== 6) {
+    console.log(`You rolled a ${dice}`);
+    dice = Math.trunc(Math.random() * 6) + 1;
+    if (dice === 6) {
+        console.log('Loop is about to end...');
+    }
+}
+
+
+
