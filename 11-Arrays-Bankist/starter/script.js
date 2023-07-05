@@ -61,16 +61,132 @@ const inputLoanAmount = document.querySelector('.form__input--loan-amount');
 const inputCloseUsername = document.querySelector('.form__input--user');
 const inputClosePin = document.querySelector('.form__input--pin');
 
+const displayMovements = function (movements) {
+  containerMovements.innerHTML = '';
+  movements.forEach(function (mov, i) {
+    const type = mov > 0 ? 'deposit' : 'withdrawl';
+    const html = `  
+    <div class="movements__row">
+      <div class="movements__type movements__type--${type}">${
+      i + 1
+    } ${type}</div>
+      <div class="movements__value">${mov}</div>
+  </div>`;
+    containerMovements.insertAdjacentHTML('afterbegin', html);
+  });
+};
+displayMovements(account1.movements);
 /////////////////////////////////////////////////
 /////////////////////////////////////////////////
 // LECTURES
 
+// const movements = [200, 450, -400, 3000, -650, -130, 70, 1300];
+
+/////////////////////////////////////////////////
+/*  LESSON 1 
+let arr = ['a', 'b', 'c', 'd', 'e'];
+
+/// SLICE method // - we can extract part without changing the array
+
+console.log(arr.slice(2));
+console.log(arr.slice(2, 4));
+console.log(arr.slice(-2));
+console.log(arr.slice(-1)); // this is how you get the last element of the array
+console.log(arr.slice(1, -2));
+// we ca use the slice method to create a shallow copy of the array
+console.log(arr.slice());
+console.log([...arr]); // is the same
+
+/// SPLICE method
+// - almost the same way as slice, but it chenge the original array
+// console.log(arr.splice(2));
+arr.splice(-1);
+console.log(arr);
+arr.splice(1, 2);
+console.log(arr);
+
+/// REVERSE method  - also mutates/ changes the original array
+arr = ['a', 'b', 'c', 'd', 'e'];
+const arr2 = ['j', 'i', 'h', 'g', 'f'];
+console.log(arr2.reverse());
+
+// CONCAT method - does not mutate the original array
+const letters = arr.concat(arr2);
+console.log(letters);
+console.log([...arr, ...arr2]); // (spread operator) this method does not mutate the original array
+
+/// JOIN method
+console.log(letters.join('-'));
+        */
+
+/*   LESSON 2
+/// AT method
+
+const arr = [23, 11, 64];
+console.log(arr[0]);
+console.log(arr.at(0));
+
+// if we want to get the last element of the array
+console.log(arr[arr.length - 1]);
+console.log(arr.slice(-1)[0]);
+console.log(arr.at(-1));
+
+// AT method also works on strings
+console.log('jonas'.at(0));
+console.log('jonas'.at(-1));
+*/
+
+/* LESSON 3 
+// LOOPING ARRAYS - FOREACH
+// will always loop aver the entire array
+// if we need to break up a loop, we use a for of loop
+
+const movements = [200, 450, -400, 3000, -650, -130, 70, 1300];
+// for (const movement of movements)
+for (const [i, movement] of movements.entries()) {
+  if (movement > 0) {
+    console.log(`Movement ${i + 1}: You deposited ${movement}`);
+  } else {
+    console.log(`Movement ${i + 1}: You withdrew ${Math.abs(movement)}`);
+  }
+}
+console.log('-------- FOREACH ------------------');
+movements.forEach(function (mov, i, arr) {
+  if (mov > 0) {
+    console.log(`Movement ${i + 1}: You deposited ${mov}`);
+  } else {
+    console.log(`Movement ${i + 1}: You withdrew ${Math.abs(mov)}`);
+  }
+});
+
+// 0:function(200)
+// 1: function(450)
+// 2: function(-400)
+// ...
+// FOREACH passes in: The current element, The index and the entire array that we are looping
+*/
+
+/*LESSON 4
+// forEach with Maps and Sets
+// MAPS
 const currencies = new Map([
   ['USD', 'United States dollar'],
   ['EUR', 'Euro'],
   ['GBP', 'Pound sterling'],
 ]);
 
-const movements = [200, 450, -400, 3000, -650, -130, 70, 1300];
+currencies.forEach(function (value, key, map) {
+  console.log(`${key}: ${value}`);
+});
 
-/////////////////////////////////////////////////
+// SETS
+const currenciesUnique = new Set(['USD', 'GBP', 'USD', 'EUR', 'EUR']);
+console.log(currenciesUnique);
+
+currenciesUnique.forEach(function (value, _, map) {
+  console.log(`${value}: ${value}`);
+});
+*/
+
+// LESSON 5
+// PROJECT BANKIST APP
