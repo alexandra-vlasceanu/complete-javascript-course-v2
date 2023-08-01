@@ -177,6 +177,45 @@ btnTransfer.addEventListener('click', function (e) {
     updateUI(currentAccount);
   }
 });
+// some method. Bank will only grant a loan if there is at least one deposit with at least 10% of the requested loan ammount
+btnLoan.addEventListener('click', function (e) {
+  e.preventDefault();
+
+  const amount = Number(inputLoanAmount.value);
+  if (amount > 0 && currentAccount.movements.some(mov => mov >= amount * 0.1)) {
+    // Add movement (money)
+    currentAccount.movements.push(amount);
+
+    // Update the UI
+    updateUI(currentAccount);
+  }
+  inputLoanAmount.value = '';
+});
+
+btnClose.addEventListener('click', function (e) {
+  e.preventDefault();
+
+  if (
+    inputCloseUsername.value === currentAccount.username &&
+    Number(inputClosePin.value) === currentAccount.pin
+  ) {
+    const index = accounts.findIndex(
+      acc => acc.username === currentAccount.username
+    );
+    console.log(index);
+
+    // Delete account
+    accounts.splice(index, 1);
+
+    //Hide UI
+    containerApp.style.opacity = 0;
+  }
+  inputCloseUsername.value = inputClosePin.value = '';
+});
+
+/// FINDINDEX method ///
+// Both FIND and FINDINDEX methods get access to also the current index and the current entire array
+
 /////////////////////////////////////////////////
 /////////////////////////////////////////////////
 // LECTURES
@@ -533,3 +572,27 @@ console.log(firstWithdrawal);
 const account = accounts.find(acc => acc.owner === 'Jessica Davis');
 console.log(account);
 */
+
+/// SOME and EVERY Methods ///
+
+/// Some method //
+console.log(movements);
+// Checks only for equality
+console.log(movements.includes(-130));
+
+// We can specify a condition
+const anyDeposits = movements.some(mov => mov > 1500);
+console.log(anyDeposits);
+
+/// Every method //
+// Is simmilar to SOME method the difference between them is that EVERY only returns TRUE if all the elements in the array
+// satisfy the condition that we pass in
+
+console.log(movements.every(mov => mov > 0));
+console.log(account4.movements.every(mov => mov > 0));
+
+// Separate callback
+const deposit = mov => mov > 0;
+console.log(movements.some(deposit));
+console.log(movements.every(deposit));
+console.log(movements.filter(deposit));
