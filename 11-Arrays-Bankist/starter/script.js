@@ -61,9 +61,12 @@ const inputLoanAmount = document.querySelector('.form__input--loan-amount');
 const inputCloseUsername = document.querySelector('.form__input--user');
 const inputClosePin = document.querySelector('.form__input--pin');
 
-const displayMovements = function (movements) {
+const displayMovements = function (movements, sort = false) {
   containerMovements.innerHTML = '';
-  movements.forEach(function (mov, i) {
+
+  const movs = sort ? movements.slice().sort((a, b) => a - b) : movements;
+
+  movs.forEach(function (mov, i) {
     const type = mov > 0 ? 'deposit' : 'withdrawl';
     const html = `  
     <div class="movements__row">
@@ -212,7 +215,12 @@ btnClose.addEventListener('click', function (e) {
   }
   inputCloseUsername.value = inputClosePin.value = '';
 });
-
+let sorted = false;
+btnSort.addEventListener('click', function (e) {
+  e.preventDefault();
+  displayMovements(currentAccount.movements, !sorted);
+  sorted = !sorted;
+});
 /// FINDINDEX method ///
 // Both FIND and FINDINDEX methods get access to also the current index and the current entire array
 
@@ -596,7 +604,7 @@ const deposit = mov => mov > 0;
 console.log(movements.some(deposit));
 console.log(movements.every(deposit));
 console.log(movements.filter(deposit));
-*/
+
 
 // The FLAT and
 
@@ -633,3 +641,38 @@ const overalBalance2 = accounts
   .flatMap(acc => acc.movements)
   .reduce((acc, mov) => acc + mov, 0);
 console.log(overalBalance);
+*/
+
+/// SORTING ARRAYS ///
+// .sort - mutates the original array
+// The .SORT method does the sort based on strings. Converts everything to strings and the does the sorting itself
+
+// Strings
+const owners = ['Jonas', 'Zach', 'Adam', 'Martha'];
+console.log(owners.sort());
+
+// Numbers
+console.log(movements); // [200, 450, -400, 3000, -650, -130, 70, 1300]
+console.log(movements.sort()); // [-130, -400, -650, 1300, 200, 3000, 450, 70] - sorted as strings
+// we can fix this by passing in a compare callback function into the sort method
+// a, b - two consecutive numbers in the array
+
+// return < 0 - A, B (keep order)
+// return > 0 - B, A (switch order)
+
+// Ascending
+// movements.sort((a, b) => {
+//   if (a > b) return 1;
+//   if (a < b) return -1;
+// });
+
+movements.sort((a, b) => a - b);
+console.log(movements);
+// Descending
+// movements.sort((a, b) => {
+//   if (a > b) return -1;
+//   if (a < b) return 1;
+// });
+
+movements.sort((a, b) => b - a);
+console.log(movements);
