@@ -722,3 +722,80 @@ labelBalance.addEventListener('click', function () {
   );
   console.log(movementsUI);
 });
+/*
+WHICH ARRAY METHOD TO USE?
+
+/// 1. TO MUTATE ORIGINAL ARRAY ///
+
+Add to original:
+  .push (end)
+  .unshift (start)
+
+Remove from original:
+  .pop (end)
+  .shift (start)
+. splice (any)
+
+Others:
+  .reverse
+  .sort
+  .fill
+
+/// 2. A NEW ARRAY ///
+
+Computed from original:
+  .map (loop) - loops over the original array and creates a new one based on that
+
+Filtered using condition:
+  .filter
+
+Portion of original:
+  .slice
+
+Adding origianl to other:
+  .concat - concat 2 arrays and create a new array based on that 
+
+Flattening to original:
+  .flat
+  .flatMap
+  
+/// 3. AN ARRAY INDEX ///
+
+Based on value:
+  .indexof
+
+Based on test condition:
+  .findIndex
+* The difference between them is that findIndex can basically search for an element in the array, based on a test condition that
+we provide in the callback function
+
+/// 4. AN ARRAY ELEMENT ///
+
+Based on test condition: if we actually need the array element itself:
+  .find
+
+/// 5. KNOW IF ARRAY INCLUDES ///
+All return boolean values. Very helpful in an IF/ELSE statement
+
+Based on value: we can test if contains a single value
+  .includes
+
+Based on test condition: we can specify a condition based on a callback function
+  .some  - returns true if al least one of the elements in the array  satisfies the condition
+  .every - only returns true if all of the elements satisfy the condition
+
+/// 6. TRANSFORM AN ARRAY INTO A STRING ///
+
+Based on separator string:
+  .join 
+
+/// 7. TO TRANSFORM TO VALUE 
+
+Based on accumulator:
+  .reduce - reduce the array into a single value. That value can be of any type (number, string, boolean, array or an object)
+
+/// 8. TO JUST LOOP OVER AN ARRAY ///
+
+Based on callback:
+  .forEach  - does not create a new array or a new value, just loops over it
+*/
