@@ -641,7 +641,7 @@ const overalBalance2 = accounts
   .flatMap(acc => acc.movements)
   .reduce((acc, mov) => acc + mov, 0);
 console.log(overalBalance);
-*/
+
 
 /// SORTING ARRAYS ///
 // .sort - mutates the original array
@@ -676,3 +676,49 @@ console.log(movements);
 
 movements.sort((a, b) => b - a);
 console.log(movements);
+*/
+
+/// MORE WAYS OF CREATING AND FILLING ARRAYS ///
+
+const arr = [1, 2, 3, 4, 5, 6, 7];
+console.log(new Array(1, 2, 3, 4, 5, 6, 7));
+
+// We can generate arrays programatically, without having to define all the items maually
+// Whenever we only pass in one argument, then it creates a new empty argument with that length
+
+// Empty arrays + fill method ///
+const x = new Array(7);
+console.log(x);
+// we cannot call any other method like:
+console.log(x.map(() => 5)); // nothing happens
+
+// we can only call the FILL method
+// x.fill(1); // this mutates the underlying array
+
+// er can also specify where we want it to start to fill and when to end (3, 5):
+x.fill(1, 3, 5);
+
+console.log(x);
+
+arr.fill(23, 2, 6);
+console.log(arr);
+
+// Array.from
+const y = Array.from({ length: 7 }, () => 1);
+console.log(y);
+
+// we get access to the current element (cur) and the index (i)
+const z = Array.from({ length: 7 }, (cur, i) => i + 1);
+
+// With Array.from we can create arrays from other things
+// querySelectorAll returns a NodeList, which is something like an array, which contains all the selected elements, but is not a
+// real array and so it doesn't have methods like: map() or reduce(). if we want to use a real array method on a nodeList,
+// we would first need to convert the NodeList to an array and for that, Array.from() is perfect.
+
+labelBalance.addEventListener('click', function () {
+  const movementsUI = Array.from(
+    document.querySelectorAll('.movements__value'),
+    el => Number(el.textContent.replace('€', ''))
+  );
+  console.log(movementsUI);
+});
