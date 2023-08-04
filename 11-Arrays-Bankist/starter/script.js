@@ -676,7 +676,7 @@ console.log(movements);
 
 movements.sort((a, b) => b - a);
 console.log(movements);
-*/
+
 
 /// MORE WAYS OF CREATING AND FILLING ARRAYS ///
 
@@ -722,6 +722,8 @@ labelBalance.addEventListener('click', function () {
   );
   console.log(movementsUI);
 });
+*/
+
 /*
 WHICH ARRAY METHOD TO USE?
 
@@ -799,3 +801,114 @@ Based on accumulator:
 Based on callback:
   .forEach  - does not create a new array or a new value, just loops over it
 */
+
+// Array methods in practice //
+// 1. We want to calculate how much has been deposited in total in the bank, in all the accounts across the bank
+
+const bankDepositSum = accounts
+  .flatMap(acc => acc.movements)
+  .filter(mov => mov > 0)
+  .reduce((sum, cur) => sum + cur, 0);
+console.log(bankDepositSum);
+
+// 2.We want to count how many deposits there have been in the bank with at least $1000
+
+// const numDeposits1000 = accounts
+//   .flatMap(acc => acc.movements)
+//   .filter(mov => mov >= 1000).length;
+// console.log(numDeposits1000);
+
+// we can do the same thing ^ using reduce method:
+// the callback function of the reduce method always has as a first parameter the accumulator. That is like a snowball onto which
+// we want to accumulate a certain value
+const numDeposits1000 = accounts
+  .flatMap(acc => acc.movements)
+  // .reduce((count, cur) => (cur >= 1000 ? count + 1 : count), 0);
+  .reduce((count, cur) => (cur >= 1000 ? count + 1 : count), 0);
+
+console.log(numDeposits1000);
+
+// Prefixed a++ operator
+let a = 10;
+console.log(++a);
+console.log(a);
+
+// 3. We want to create a new object instead of just a number or just a string
+const { deposits, withdawals } = accounts
+  .flatMap(acc => acc.movements)
+  .reduce(
+    (sums, cur) => {
+      // we ask if the current value is a deposit or a withdrawal. If is > 0, then we want to add the current value (cur)
+      // to the sums.deposits and then add the current value onto that. And if not (:) so the current value is < 0, then we can
+      // add it to the sums.withdrawals
+      // if we have {}, we need to manually return the accumulator
+
+      // cur > 0 ? (sums.deposits += cur) : (sums.withdawals += cur);
+
+      sums[cur > 0 ? 'deposits' : 'withdawals'] += cur;
+      return sums;
+    },
+    { deposits: 0, withdawals: 0 }
+  );
+console.log(deposits, withdawals);
+
+// 4. We want to create a simple function to convert any string to a title case
+// this is a nice title -> This Is a Nice Title
+const convertTitleCase = function (title) {
+  const capitalize = str => str[0].toUpperCase() + str.slice(1);
+
+  const exceptions = ['a', 'an', 'and', 'the', 'but', 'or', 'on', 'in', 'with'];
+  const titleCase = title
+    .toLowerCase()
+    .split(' ')
+    .map(
+      word => (exceptions.includes(word) ? word : capitalize(word))
+      // if the current word is included in the exceptions array, then simply return that word, if not (:)capitalize it
+    )
+    .join(' ');
+  return capitalize(titleCase);
+};
+
+console.log(convertTitleCase('this is a nice title'));
+console.log(convertTitleCase('this is a LONG title, but not too long'));
+console.log(convertTitleCase('and here is another title with an EXAMPLE'));
+
+
+
+// Coding Challenge #4
+
+/* 
+Julia and Kate are still studying dogs, and this time they are studying if dogs are eating too much or too little.
+Eating too much means the dog's current food portion is larger than the recommended portion, and eating too little is the opposite.
+Eating an okay amount means the dog's current food portion is within a range 10% above and 10% below the recommended portion 
+(see hint).
+
+1. Loop over the array containing dog objects, and for each dog, calculate the recommended food portion and add it 
+to the object as a new property. Do NOT create a new array, simply loop over the array. 
+Forumla: recommendedFood = weight ** 0.75 * 28. (The result is in grams of food, and the weight needs to be in kg)
+2. Find Sarah's dog and log to the console whether it's eating too much or too little. HINT: Some dogs have multiple owners,
+ so you first need to find Sarah in the owners array, and so this one is a bit tricky (on purpose) 🤓
+3. Create an array containing all owners of dogs who eat too much ('ownersEatTooMuch') and an array with all owners of dogs
+ who eat too little ('ownersEatTooLittle').
+4. Log a string to the console for each array created in 3., like this: "Matilda and Alice and Bob's dogs eat too much!" 
+and "Sarah and John and Michael's dogs eat too little!"
+5. Log to the console whether there is any dog eating EXACTLY the amount of food that is recommended (just true or false)
+6. Log to the console whether there is any dog eating an OKAY amount of food (just true or false)
+7. Create an array containing the dogs that are eating an OKAY amount of food (try to reuse the condition used in 6.)
+8. Create a shallow copy of the dogs array and sort it by recommended food portion in an ascending order
+ (keep in mind that the portions are inside the array's objects)
+
+HINT 1: Use many different tools to solve these challenges, you can use the summary lecture to choose between them 😉
+HINT 2: Being within a range 10% above and below the recommended portion means:
+ current > (recommended * 0.90) && current < (recommended * 1.10). Basically, the current portion should be between 90% and 110% of
+  the recommended portion.
+
+TEST DATA:
+const dogs = [
+  { weight: 22, curFood: 250, owners: ['Alice', 'Bob'] },
+  { weight: 8, curFood: 200, owners: ['Matilda'] },
+  { weight: 13, curFood: 275, owners: ['Sarah', 'John'] },
+  { weight: 32, curFood: 340, owners: ['Michael'] }
+];
+
+GOOD LUCK 😀
