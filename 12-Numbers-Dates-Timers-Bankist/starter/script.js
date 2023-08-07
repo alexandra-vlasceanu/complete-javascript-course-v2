@@ -164,7 +164,7 @@ btnLogin.addEventListener('click', function (e) {
   );
   console.log(currentAccount);
 
-  if (currentAccount?.pin === Number(inputLoginPin.value)) {
+  if (currentAccount?.pin === +inputLoginPin.value) {
     // Display UI and message
     labelWelcome.textContent = `Welcome back, ${
       currentAccount.owner.split(' ')[0]
@@ -182,7 +182,7 @@ btnLogin.addEventListener('click', function (e) {
 
 btnTransfer.addEventListener('click', function (e) {
   e.preventDefault();
-  const amount = Number(inputTransferAmount.value);
+  const amount = +inputTransferAmount.value;
   const receiverAcc = accounts.find(
     acc => acc.username === inputTransferTo.value
   );
@@ -206,7 +206,7 @@ btnTransfer.addEventListener('click', function (e) {
 btnLoan.addEventListener('click', function (e) {
   e.preventDefault();
 
-  const amount = Number(inputLoanAmount.value);
+  const amount = +inputLoanAmount.value;
 
   if (amount > 0 && currentAccount.movements.some(mov => mov >= amount * 0.1)) {
     // Add movement
@@ -223,7 +223,7 @@ btnClose.addEventListener('click', function (e) {
 
   if (
     inputCloseUsername.value === currentAccount.username &&
-    Number(inputClosePin.value) === currentAccount.pin
+    +inputClosePin.value === currentAccount.pin
   ) {
     const index = accounts.findIndex(
       acc => acc.username === currentAccount.username
@@ -251,3 +251,48 @@ btnSort.addEventListener('click', function (e) {
 /////////////////////////////////////////////////
 /////////////////////////////////////////////////
 // LECTURES
+
+/// CONVERTING AND CHECKING NUMBERS ///
+// All numbers are presented internally as floating point numbers. Always as decimals, no matter if we write them as integers
+// or decimals
+// Numbers are represented internally in a 64 base 2 format. Are always stored in a binary format, only composed of 0 and 1
+
+console.log(23 === 23.0);
+console.log(0.1 + 0.2);
+
+// Convert strings to numbers
+console.log(Number('23'));
+console.log(+'23');
+
+// Parsing
+// we use it when we need to read a value out of a string
+//  - we can parse a number from a string
+// The parseInt function accepts a second argument, which is the so called: regex
+// The regex is the base of the numeral system that we are using
+// Base 10 number: 0 to 9
+
+console.log(Number.parseInt('30px', 10));
+console.log(Number.parseInt('e23', 10));
+
+// ParseFloat
+console.log(Number.parseFloat('2.5rem')); // 2.5
+console.log(Number.parseInt('2.5rem')); // 2
+
+// isNaN
+// - we can use this one to check if a value is not a number
+console.log(Number.isNaN(20));
+console.log(Number.isNaN('20'));
+console.log(Number.isNaN(+'20X'));
+console.log(Number.isNaN(20 / 0));
+
+//isFinite
+// - is the best way of checking if a value is a number, not a string
+console.log(Number.isFinite(20));
+console.log(Number.isFinite('20'));
+console.log(Number.isFinite(+'20X'));
+console.log(Number.isFinite(20 / 0));
+
+// isInteger
+console.log(Number.isInteger(23));
+console.log(Number.isInteger(23.0));
+console.log(Number.isInteger(23 / 0));
