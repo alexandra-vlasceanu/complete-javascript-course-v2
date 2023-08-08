@@ -364,7 +364,7 @@ console.log((2.345).toFixed(2)); // '2.35'
 console.log(+(2.345).toFixed(2)); // 2.35
 
 */ /////////////////////////////////////////// CLOSE ////////////////////////////////////////////////////////////
-
+/*
 /// THE REMAINDER OPERATOR  % ///
 // Simply returns the remainder of a division
 
@@ -393,3 +393,58 @@ labelBalance.addEventListener('click', function () {
     if (i % 3 === 0) row.style.backgroundColor = 'blue';
   });
 });
+*/ /////////////////////////////////////////// CLOSE ////////////////////////////////////////////////////////////
+
+/// NUMERIC SEPARATORS ///
+const diameter = 287_460_000_000;
+console.log(diameter);
+
+const price = 345_99;
+console.log(price);
+
+const transferFee1 = 15_00;
+const transferFee2 = 1_500;
+
+// Will not work
+console.log(Number('230_000')); // NaN
+console.log(parseInt('230_000')); // 230
+
+/// BIGINT ///
+// we use to store large numbers
+// Biggest number in JS
+console.log(2 ** 53 - 1);
+console.log(Number.MAX_SAFE_INTEGER);
+
+// not accurate
+console.log(2 ** 53 + 1);
+console.log(2 ** 53 + 2);
+console.log(2 ** 53 + 3);
+console.log(2 ** 53 + 4);
+
+// we use n to tranform a regular number into BigInt number
+console.log(436578239092309238450934580936803496803n);
+console.log(BigInt(436578239092309));
+
+// Operations
+// All the usual operators works the same
+console.log(10000n + 10000n); // 20000
+console.log(289363637484839939239282n * 10000n); // 2893636374848399392392820000n
+
+// Math operations does not work here:
+// console.log(Math.sqrt(16n)); // error
+// It is not possinle to mix BigInt with regular numbers
+const huge = 23495475684939043n;
+const num = 23;
+// console.log(huge * num); //  Cannot mix BigInt and other types
+console.log(huge * BigInt(num));
+
+// Exceptions:
+console.log(20n > 15); // true
+console.log(20n === 15); //false - because triple operator does not do type coercion
+console.log(typeof 20n); // BigInt
+
+console.log(20n == 20); // true - because it does type coercion
+
+// Divisions
+console.log(10n / 3n); // 3n
+console.log(10 / 3); // 3.333333
