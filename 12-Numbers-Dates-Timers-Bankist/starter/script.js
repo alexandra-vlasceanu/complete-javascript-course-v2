@@ -395,6 +395,7 @@ labelBalance.addEventListener('click', function () {
 });
 */ /////////////////////////////////////////// CLOSE ////////////////////////////////////////////////////////////
 
+/*
 /// NUMERIC SEPARATORS ///
 const diameter = 287_460_000_000;
 console.log(diameter);
@@ -448,3 +449,46 @@ console.log(20n == 20); // true - because it does type coercion
 // Divisions
 console.log(10n / 3n); // 3n
 console.log(10 / 3); // 3.333333
+
+*/ /////////////////////////////////////////// CLOSE ////////////////////////////////////////////////////////////
+
+/// CREATING DATES ///
+// dates are 0 based so 10 is actually month 11 (nov)
+// Create a date
+// 1. new Date()
+
+const now = new Date();
+console.log(now);
+// parse a date from a date string
+console.log(new Date('Aug 09 2023 10:28:06'));
+
+console.log(new Date('December 24, 2015'));
+console.log(new Date(account1.movementsDates[0]));
+
+console.log(new Date(2037, 10, 19, 15, 23, 5));
+console.log(new Date(2037, 10, 31));
+
+console.log(new Date(0));
+// how to convert from days to miliseconds
+// 3 days * 24h * 60 min in one hour * 60 number of seconds in one min * 1000 to convert in miliseconds
+console.log(new Date(3 * 24 * 60 * 60 * 1000));
+
+// Working with dates
+const future = new Date(2037, 10, 19, 15, 23, 5);
+console.log(future);
+console.log(future.getFullYear()); // 2037
+console.log(future.getMonth()); // 10
+console.log(future.getDate()); // 19 (day date)
+console.log(future.getDay()); // 4 ( day of the week)
+console.log(future.getHours());
+console.log(future.getMinutes());
+console.log(future.getSeconds());
+console.log(future.toISOString()); // follows an international standard, useful when we want to convert a particular date object into a string that we can store somewhere
+
+// We can get the timestamp for the date. Timestamp is the miliseconds which have passed since January 1, 1970
+console.log(future.getTime()); // 2142253385000
+console.log(new Date(2142253385000)); // Thu Nov 19 2037 15:23:05
+
+console.log(Date.now());
+future.setFullYear(2040);
+console.log(future); // Mon Nov 19 2040
