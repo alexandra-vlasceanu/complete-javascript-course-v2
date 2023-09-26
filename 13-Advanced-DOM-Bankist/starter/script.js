@@ -32,7 +32,7 @@ document.addEventListener('keydown', function (e) {
     closeModal();
   }
 });
-
+/*
 // / Lessons ////
 
 // HOW DOM WORKS ///
@@ -132,5 +132,39 @@ logo.classList.remove('c');
 
 // Don't do it
 logo.className = 'jonas';
+/////////////////////////// CLOSE ///////////////////////////
+*/
 
 //// IMPLEMENTING SMOOTH SCROLLING /////
+const btnScrollTo = document.querySelector('.btn--scroll-to');
+const section1 = document.querySelector('#section--1');
+
+btnScrollTo.addEventListener('click', function (e) {
+  const s1coords = section1.getBoundingClientRect();
+  console.log(s1coords);
+
+  console.log(e.target.getBoundingClientRect());
+
+  console.log('Current scroll (X/Y)', window.pageXOffset, window.pageYOffset);
+
+  console.log(
+    'height/width viewport',
+    document.documentElement.clientHeight,
+    document.documentElement.clientWidth
+  );
+
+  /////// Scrolling
+  // window.scrollTo(
+  //   s1coords.left + window.pageXOffset,
+  //   s1coords.top + window.pageYOffset
+  // );
+
+  window.scrollTo({
+    left: s1coords.left + window.pageXOffset,
+    top: s1coords.top + window.pageYOffset,
+    behaviour: 'smooth',
+  });
+
+  // A better way of writing:
+  section1.scrollIntoView({ behavior: 'smoth' });
+});
