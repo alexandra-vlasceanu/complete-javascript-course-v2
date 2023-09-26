@@ -168,3 +168,25 @@ btnScrollTo.addEventListener('click', function (e) {
   // A better way of writing:
   section1.scrollIntoView({ behavior: 'smoth' });
 });
+
+////// TYPES OF EVENTS AND EVENT HANDLERS /////
+
+const h1 = document.querySelector('h1');
+
+const alertH1 = function (e) {
+  alert('addEventListener: Great! You are reading the heading :D');
+  // h1.removeEventListener('mouseenter', alertH1);
+};
+
+h1.addEventListener('mouseenter', alertH1);
+
+setTimeout(() => h1.removeEventListener('mouseenter', alertH1), 3000);
+
+// h1.onmouseenter = function (e) {
+//   alert('onmouseenter: Great! You are reading the heading :D');
+// };
+
+// AddEventListener is better because:
+// - it allows us to add multiple eventListeners to the same event
+// - we can actually remove an event handler in case we don't need it anymore. And to do that we need to export the function into
+//a named function
