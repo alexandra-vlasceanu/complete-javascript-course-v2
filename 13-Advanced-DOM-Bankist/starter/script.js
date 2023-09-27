@@ -252,5 +252,37 @@ document.querySelector('.nav').addEventListener('click', function (e) {
   console.log('NAV', e.target, e.currentTarget);
 });
 /////////////////////////// CLOSE ///////////////////////////
-/// IMPLEMENTING PAGE NAVIGATION ///
 */
+/// DOM TRAVERSING ///
+const h1 = document.querySelector('h1');
+
+/// Going downwards: selecting child elements
+console.log(h1.querySelectorAll('.highlight'));
+console.log(h1.childNodes);
+console.log(h1.children);
+h1.firstElementChild.style.color = 'white';
+h1.lastElementChild.style.color = 'orangered';
+
+/// Going upwards: selecting parents
+console.log(h1.parentNode);
+console.log(h1.parentElement);
+// Most of the time we actually need a parent element which is not a direct parent
+h1.closest('.header').style.background = 'var(--gradient-secondary)';
+h1.closest('h1').style.background = 'var(--gradient-primary)';
+// CLOSEST method - receives a query string just like querySelector
+// It selected the closest header to our h1 element, so the closest parent element that has this class and then
+// it's simply applied all style to that element
+// find parents no matter how far up in the DOM tree
+
+// Going sideways: selecting silbling - we can only access direct siblings(previous and the next one)
+console.log(h1.previousElementSibling);
+console.log(h1.nextElementSibling);
+
+console.log(h1.previousSibling);
+console.log(h1.nextSibling);
+
+// if we need all the children elements:
+console.log(h1.parentElement.children);
+[...h1.parentElement.children].forEach(function (el) {
+  if (el !== h1) el.style.transform = 'scale(0.5)';
+});
